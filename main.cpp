@@ -14,6 +14,8 @@ but unfortunatly I have to write a bio essay and finish my SE Quality Assurance 
 
 using namespace std;
 
+//cheep defines to amke "assemble dictionary" look better... In the future I would make the 
+//'next' pointers in the kletter struct private, and have a getter function that does this translation
 #define C 0
 #define I 1
 #define K 2
@@ -49,6 +51,8 @@ struct letter{
 
 };
 
+//cheep translation to make the code look better later
+//with a real alphabet this wouldnt be needed
 int asciiToAlphabet(int charCode){
 	switch(charCode){
 		case 67://C
@@ -73,13 +77,15 @@ int asciiToAlphabet(int charCode){
 	}
 }
 
-void iterateAndInitialize(letter* node, letter* start, int hi){
+//For assembling the dictionary's nodes into a sufix tree
+//This removes all null nodes by pointing all null nodes back to starting characters
+void nullDictionary(letter* node, letter* start, int hi){
 	for(int i=0;i<alphabetLength;i++){
 		if( node->next[i] == NULL ){
 			node->next[i] = start->next[i];
 		}
 		else{
-			iterateAndInitialize(node->next[i], start, ++hi);
+			nullDictionary(node->next[i], start, ++hi);
 		}
 	}
 }
@@ -135,7 +141,7 @@ void assembleDictionary(letter** head){
 
 	//Now we link, which is the special part
 	//set all null links back to the start, so that there are no null links
-	iterateAndInitialize(start, start, 0);
+	nullDictionary(start, start, 0);
 
 
 	//now add some subset linking, this is dictionary dependant but could be automated
@@ -185,7 +191,7 @@ int main () {
 	letter* dictionary;
 	assembleDictionary(&dictionary);
 	//string use = "ITICSLIPSICKT";
-	string use = "LIPSLIPS";
+	string use = "CLIPSTICKY";
 	findString("", use, dictionary);
 
 	cout << "*******" << endl << "The longest word is " << longestWord << " which is of length " << ofLength << endl;
