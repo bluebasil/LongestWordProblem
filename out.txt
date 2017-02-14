@@ -1,0 +1,21 @@
+Compiling...
+g++ -o "main" "main".cpp 
+./"main"
+|CLIPSTICKY
+Word Found =  of length 0
+C|LIPSTICKY
+CL|IPSTICKY
+CLI|PSTICKY
+CLIP|STICKY
+Word Found = CLIP of length 4
+CLIPS|TICKY
+Word Found = CLIPS of length 5
+CLIPST|ICKY
+CLIPSTI|CKY
+CLIPSTIC|KY
+CLIPSTICK|Y
+Word Found = LIPSTICK of length 8
+LIPSTICKY|
+Word Found = STICKY of length 6
+*******
+The longest word is LIPSTICK which is of length 8
